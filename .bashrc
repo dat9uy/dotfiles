@@ -116,21 +116,36 @@ if ! shopt -oq posix; then
   fi
 fi
 
-export PATH="$HOME/.pyenv/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-
+# set vi mode
 set -o vi
 
+# custom bash prompt
 PS1="\n[\h]\[$(tput sgr0)\] [\[\033[32m\]\w]\[\033[0m\]\n\[\033[1;36m\]> \[\033[0m\]"
 
+# linuxbrew
+export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
+export PATH="/home/linuxbrew/.linuxbrew/sbin:$PATH"
+export MANPATH="/home/linuxbrew/.linuxbrew/share/man:$MANPATH"
+export INFOPATH="/home/linuxbrew/.linuxbrew/share/info:$INFOPATH"
 
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
+# the fuck
 eval "$(thefuck --alias)"
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# nodenv
+eval "$(nodenv init -)"
+
+# pyenv 
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)";
+fi
+
+if which pyenv-virtualenv-init > /dev/null; then
+  eval "$(pyenv virtualenv-init -)";
+fi
+
+# fzf
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+######
+export TERM=xterm-256color
+
