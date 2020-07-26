@@ -41,7 +41,7 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec kitty
+bindsym $mod+Return exec alacritty
 bindsym $mod+grave exec xfce4-terminal --drop-down
 
 # kill focused window
@@ -105,10 +105,10 @@ bindsym $mod+BackSpace layout toggle splith splitv
 # bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
-# bindsym $mod+Shift+space floating toggle
+bindsym $mod+Shift+f floating toggle
 
 # change focus between tiling / floating windows
-# bindsym $mod+space focus mode_toggle
+bindsym $mod+shift+space focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
@@ -172,10 +172,10 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
@@ -190,6 +190,14 @@ mode "resize" {
 }
 
 bindsym $mod+r mode "resize"
+
+# set up float windows
+for_window [class="Xfce4-appfinder"] floating enable
+for_window [class="jetbrains-toolbox"] floating enable
+for_window [class="Catfish"] floating enable
+for_window [class="Blueman-manager"] floating enable
+for_window [class="Pavucontrol"] floating enable
+for_window [class="R_x11"] floating enable
 
 # no tile bar
 for_window [class="^.*"] border pixel 3
