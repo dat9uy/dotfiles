@@ -69,13 +69,13 @@ ZSH_THEME="avit"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 
-export NVM_LAZY_LOAD=true
-export NVM_COMPLETION=true
+# export NVM_LAZY_LOAD=true
+# export NVM_COMPLETION=true
 export FZF_BASE=/home/linuxbrew/.linuxbrew/opt/fzf
 
 plugins=(
-    pyenv-lazy
-    git
+	asdf
+	git
 	fzf
 	brew
 	conda-zsh-completion
@@ -83,7 +83,6 @@ plugins=(
 	docker-compose
 	vi-mode
 	zsh-syntax-highlighting
-	zsh-nvm
 	zsh-autosuggestions
 )
 

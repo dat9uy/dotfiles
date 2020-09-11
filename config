@@ -57,8 +57,17 @@ bindsym $mod+space exec xfce4-appfinder
 # lock screen
 bindsym $mod+Escape exec xflock4
 
+# print screen
+bindsym Print exec xfce4-screenshooter -f
+
 # file manager
 bindsym $mod+e exec thunar
+
+# bluetooth manager
+bindsym $mod+b exec blueman-manager
+
+# clipboard manager
+bindsym $mod+p exec xfce4-popup-clipman
 
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that

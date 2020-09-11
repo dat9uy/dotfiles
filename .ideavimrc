@@ -1,0 +1,6 @@
+set mapleader="\"
+
+set commentary
+set easymotion
+set surround
+set multiple-cursors
