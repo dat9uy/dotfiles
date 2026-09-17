@@ -1,0 +1,92 @@
+eval "$(~/.local/bin/mise activate zsh)"
+
+# load zgenom
+source "${HOME}/.zgenom/zgenom.zsh"
+
+zgenom autoupdate
+
+# if the init script doesn't exist
+if ! zgenom saved; then
+
+  zgenom load jandamm/zgenom-ext-eval
+
+  zgenom ohmyzsh
+  zgenom ohmyzsh plugins/git
+  zgenom ohmyzsh plugins/brew
+  zgenom ohmyzsh plugins/sudo
+  zgenom ohmyzsh plugins/direnv
+  zgenom ohmyzsh plugins/zoxide
+  zgenom ohmyzsh plugins/terraform
+
+  # Install ohmyzsh osx plugin if on macOS
+  [[ "$(uname -s)" = Darwin ]] && zgenom ohmyzsh plugins/macos
+
+  zgenom load zsh-users/zsh-syntax-highlighting
+  zgenom load zsh-users/zsh-autosuggestions
+  zgenom load "zap-zsh/supercharge"
+  zgenom load "zap-zsh/exa"
+  zgenom load hlissner/zsh-autopair
+  zgenom load wfxr/forgit
+  zgenom load "MichaelAquilina/zsh-you-should-use"
+
+  # completions
+  zgenom load zsh-users/zsh-completions
+  zgenom load dbt-labs/dbt-completion.bash _dbt master --completion
+  zgenom load https://codeberg.org/ziglang/shell-completions _zig master --completion
+  zgenom load /Users/datguy/.local/share/mise/installs/gcloud/latest/completion.zsh.inc
+  zgenom eval --name pnpm <<(pnpm completion zsh)
+  zgenom eval --name mise <<(mise completion zsh)
+  zgenom eval --name docker <<(docker completion zsh)
+  zgenom eval --name exercism <<(exercism completion zsh)
+
+  # generate the init script from plugins above
+  zgenom save
+  zgenom compile "$HOME/.zshrc"
+fi
+
+alias asdf="mise"
+alias iexr='fswatch -o lib/ | xargs -n1 -I{} mix compile'
+
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+	rm -f -- "$tmp"
+}
+
+eval "$(tv init zsh)"
+eval "$(starship init zsh)"
+
+export PATH="$PATH:/Users/datguy/.config/emacs/bin"
+
+___MY_VMOPTIONS_SHELL_FILE="${HOME}/.jetbrains.vmoptions.sh"; if [ -f "${___MY_VMOPTIONS_SHELL_FILE}" ]; then . "${___MY_VMOPTIONS_SHELL_FILE}"; fi
+
+# Added by dbt installer
+export PATH="$PATH:/Users/datguy/.local/bin"
+
+# dbt aliases
+alias dbtf=/Users/datguy/.local/bin/dbt
+
+# bun
+export PATH="/Users/datguy/.bun/bin:$PATH"
+
+export PATH="$PATH:/Users/datguy/.moose/bin"
+
+mdview() {
+  local file
+  file=$(find . -name "*.md" | fzf --preview 'glow -s dark {}' --preview-window=right:60%)
+  
+  # Only run glow if a file was actually selected (prevents error on ESC)
+  if [[ -n "$file" ]]; then
+    glow -p "$file"
+  fi
+}
+
+export HOMEBREW_NO_REQUIRE_TAP_TRUST=1
+
+# Added by Antigravity IDE
+export PATH="/Users/datguy/.antigravity-ide/antigravity-ide/bin:$PATH"
+
+# Empryo
+export PATH="$HOME/.empryo/bin:$PATH"
