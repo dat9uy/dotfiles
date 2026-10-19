@@ -12,6 +12,7 @@ if ! zgenom saved; then
 
   zgenom ohmyzsh
   zgenom ohmyzsh plugins/git
+  zgenom ohmyzsh plugins/tmux
   zgenom ohmyzsh plugins/brew
   zgenom ohmyzsh plugins/sudo
   zgenom ohmyzsh plugins/direnv
@@ -37,6 +38,7 @@ if ! zgenom saved; then
   zgenom eval --name pnpm <<(pnpm completion zsh)
   zgenom eval --name mise <<(mise completion zsh)
   zgenom eval --name docker <<(docker completion zsh)
+  zgenom eval --name orb <<(orb completion zsh)
   zgenom eval --name exercism <<(exercism completion zsh)
 
   # generate the init script from plugins above
@@ -83,10 +85,7 @@ mdview() {
   fi
 }
 
-export HOMEBREW_NO_REQUIRE_TAP_TRUST=1
-
-# Added by Antigravity IDE
-export PATH="/Users/datguy/.antigravity-ide/antigravity-ide/bin:$PATH"
+export HOMEBREW_NO_UPGRADE_AUTO_UPDATES_CASKS=1
 
 # Empryo
 export PATH="$HOME/.empryo/bin:$PATH"

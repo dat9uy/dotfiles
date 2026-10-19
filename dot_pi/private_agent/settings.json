@@ -1,14 +1,18 @@
 {
-  "lastChangelogVersion": "0.85.1",
-  "defaultProvider": "llmgateway",
-  "defaultModel": "glm-5.3-flash",
-  "defaultThinkingLevel": "high",
+  "lastChangelogVersion": "1.3.0",
+  "defaultProvider": "openai",
+  "defaultModel": "gpt-6.1-sol",
+  "defaultThinkingLevel": "medium",
   "packages": [
     "npm:pi-ollama-cloud",
-    "git:github.com/algal/pi-openai-server-compaction",
     "npm:pi-web-access",
-    "npm:pi-prompt-template-model",
-    "git:github.com/DietrichGebert/ponytail"
+    "git:github.com/DietrichGebert/ponytail",
+    "npm:@ff-labs/pi-fff"
   ],
-  "theme": "dark"
+  "theme": "dark",
+  "enabledModels": [
+    "openai/gpt-6.1-sol",
+    "openai/gpt-6-astra"
+  ],
+  "deviceId": "b2fb9aa4-e273-44d1-8743-e8b9687d42b0"
 }
